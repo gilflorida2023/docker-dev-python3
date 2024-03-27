@@ -36,7 +36,9 @@ RUN  apt-get autopurge -y \
      && rm -rf /var/lib/apt/lists/*
 
 #CMD [ "python", "./myscript.py" ]
+
 WORKDIR /home/user
 USER user
-
+RUN chmod u+x myscript.py
+#RUN ./myscript.py
 ENTRYPOINT [ "/bin/bash"]

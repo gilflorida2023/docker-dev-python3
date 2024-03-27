@@ -27,7 +27,8 @@ stop_docker-dev-python3: Makefile
 run_docker-dev-python3: Makefile
 	#docker-compose up
 	#docker run -it ${REGISTRY}/docker-dev-python3
-	docker run -ti --rm -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix ${REGISTRY}/docker-dev-python3 /usr/bin/brave-browser --no-sandbox --verbose  --disable-dev-shm-usage
+	#docker run -ti --rm -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix ${REGISTRY}/docker-dev-python3 /usr/bin/brave-browser --no-sandbox --verbose  --disable-dev-shm-usage
+	docker run -ti --rm -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix ${REGISTRY}/docker-dev-python3 
 
 
 clean:

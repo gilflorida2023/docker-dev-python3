@@ -12,4 +12,4 @@ browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()
 browser.get('brave://settings/shields')
 
 # load ini file
-# load extensions isten in config. 
+# list of extensions to load is in config.ini. 
