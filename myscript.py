@@ -17,7 +17,7 @@ chrome_options.add_argument("--incognito")
 
 browser = webdriver.Chrome(options=chrome_options)
 browser.get("https://www.google.com/")
-print(f'{browser.service.process.pid}\n',  file=sys.stderr)
+print(f'browser.service.process: {browser.service.process.pid}\n',  file=sys.stderr)
 # load ini file
 # list of extensions to load is in config.ini. 
 
