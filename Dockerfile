@@ -22,23 +22,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     | tee /etc/apt/sources.list.d/brave-browser-release.list \
  && apt-get update && apt-get install -y --no-install-recommends \
       brave-browser 
-WORKDIR /usr/src/app
+# Create a user
+RUN adduser  user
+WORKDIR /home/user
 
 COPY requirements.txt ./
 COPY myscript.py .
 RUN python3 -m pip install --timeout 60 -r requirements.txt
 
-# Create a user
-RUN adduser --disabled-password --home /home/user --shell  /usr/bin/bash user
 
 RUN  apt-get autopurge -y \
      && apt-get clean -y \
      && rm -rf /var/lib/apt/lists/*
 
-#CMD [ "python", "./myscript.py" ]
 
-WORKDIR /home/user
 USER user
-RUN chmod u+x myscript.py
 #RUN ./myscript.py
-ENTRYPOINT [ "/bin/bash"]
+ENTRYPOINT [ "/usr/bin/python3","/home/user/myscript.py" ]
+#ENTRYPOINT ["/usr/bin/brave-browser", "--disable-gpu","--no-sandbox", "--disable-dev-shm-usage","--verbose"]
+#ENTRYPOINT [ "/bin/bash"]

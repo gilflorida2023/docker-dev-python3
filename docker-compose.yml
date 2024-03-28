@@ -1,11 +1,9 @@
-version: "3.9"
+# Remove the version key
 
-name: brave-browser
 services:
   brave-browser:
-    image: rshmyrev/brave-browser
-    build: .
-    hostname: debian
+
+    image: ${MY_IP}:5000/docker-dev-python3
     environment:
       - DISPLAY=unix$DISPLAY # X11
       - PULSE_SERVER=unix:$XDG_RUNTIME_DIR/pulse/native # PulseAudio
@@ -15,10 +13,9 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro # X11
       - $XDG_RUNTIME_DIR/pulse:$XDG_RUNTIME_DIR/pulse:ro # PulseAudio
       - /run/dbus:/run/dbus:ro # D-Bus
-      - home:/home/user
-      - $HOME/Downloads:/home/user/Downloads
+      #- $HOME/Downloads:/tmp/user/Downloads
     shm_size: 1GB
-    cap_drop: [ ALL ]
+    cap_drop: [ALL]
 
-volumes:
-  home:
+#volumes:
+ #home:
