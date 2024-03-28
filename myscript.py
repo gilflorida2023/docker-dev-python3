@@ -16,16 +16,14 @@ chrome_options.add_argument("--incognito")
 #chrome_options.add_experimental_option("detach", True)
 
 browser = webdriver.Chrome(options=chrome_options)
-pid = browser.service.process.pid
-print(pid)
 browser.get("https://www.google.com/")
+print(f'{browser.service.process.pid}\n',  file=sys.stderr)
 # load ini file
 # list of extensions to load is in config.ini. 
 
-
 # keep brave from exiting, so 
-print('press control-C to exit')
-while  psutil.pid_exists(pid):    
+print(f'press control-C to exit',  file=sys.stderr)
+while  True:
     time.sleep(60)
 browser.quit()
 
