@@ -37,7 +37,26 @@ RUN  apt-get autopurge -y \
 
 
 USER user
-#RUN ./myscript.py
+#######################################
+# Get latest stable version of ublock origin. 
+# had an issue with env variables, soo.
+# this curl returns a  bunch of json about the project.
+# grab the latest version from github apis for ublock origin
+# https://docs.github.com/en/rest/pages/pages?apiVersion=2022-11-28
+RUN curl -sX GET "https://api.github.com/repos/gorhill/uBlock/releases/latest"|jq -r .name|sed -e 's/^[^0-9.]*//' >/home/user/ver.txt
+RUN echo "UBLOCK_ORIGIN VERSION:$(cat /home/user/ver.txt)"
+
+# download latest version from github.
+RUN wget -q --no-check-certificate -P /home/user/ "https://github.com/gorhill/uBlock/releases/download/$(cat /home/user/ver.txt)/uBlock0_$(cat /home/user/ver.txt).chromium.zip"
+
+# unzip the extension into current directory.
+RUN unzip -d /home/user/ /home/user/uBlock0_$(cat /home/user/ver.txt).chromium.zip
+
+# rename the extension to ublock
+# https://github.com/gorhill/uBlock/tree/master/dist#install
+RUN mv /home/user/uBlock0.chromium /home/user/ublock
+
+#######################################
+
+
 ENTRYPOINT [ "/usr/bin/python3","/home/user/myscript.py" ]
-#ENTRYPOINT ["/usr/bin/brave-browser", "--disable-gpu","--no-sandbox", "--disable-dev-shm-usage","--verbose"]
-#ENTRYPOINT [ "/bin/bash"]
