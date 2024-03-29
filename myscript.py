@@ -50,23 +50,20 @@ while not DONE:
 # load ini file
 # list of extensions to load is in config.ini. 
 
-# load ech of the specified extenions.
+# load each of the specified extenions.
 # URL for ublock origin.
-# https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-
-
 #https://github.com/gorhill/uBlock/releases/download/1.56.0/uBlock0_1.56.0.chromium.zip
-#extension_url = 'https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm'
-#chrome_version = '1.56.0'
-#path = ChromeExtension(extension_url, chrome_version).download()
-#print(f'New extension stored here: {path}\n',  file=sys.stderr)
 #
-#options = webdriver.ChromeOptions()
-#options.add_extension(path)
-#driver = webdriver.Chrome(options=options)
-# keep brave from exiting, so o
+#ublock_path='/home/user/ublock/'
+#if os.path.isdir(ublock_path):
+#    print(f'New extension downloaded here: {ublock_path}\n',  file=sys.stderr)
+#    options = webdriver.ChromeOptions()
+#    options.add_extension(ublock_path)
+#    driver = webdriver.Chrome(options=options)
+# keep brave from exiting, so an infite loop. ;(
 print(f'Kill browser window or press control-C to exit',  file=sys.stderr)
 
+# keep an eye on brave PIDs
 DONE = False
 while  not DONE:
     for i in range(0,len(brave_pids)):

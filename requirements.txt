@@ -1,4 +1,3 @@
-#crx3
 selenium
 psutil
 browser-extension
